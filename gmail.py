@@ -32,7 +32,8 @@ def get_email():
     messages = results.get('messages', [])
     for message in messages:
         msg = service.users().messages().get(userId='me', id=message['id']).execute()
-        print(msg)
+        print(msg['snippet'])
+        print(msg['id'])
 
 
 if __name__ == '__main__':
