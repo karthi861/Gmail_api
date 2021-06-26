@@ -40,15 +40,5 @@ def get_mail(msg_id):
     return data
 
 
-def store():
-    engine = db.create_engine('sqlite:///user.db', echo=True)
-    conn = engine.connect()
-    result = get_mail('17a466be847c7eda')
-    conn.execute('INSERT INTO mail(description,thId) VALUES(:description,:thId)',
-                 (result['snippet']), result['threadId'])
-    print("entered successfully")
-    conn.close()
-
-
 if __name__ == '__main__':
     get_email()
