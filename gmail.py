@@ -30,10 +30,24 @@ def get_email():
     service = get_service()
     results = service.users().messages().list(userId='me', maxResults=5).execute()
     messages = results.get('messages', [])
-    for message in messages:
-        msg = service.users().messages().get(userId='me', id=message['id']).execute()
-        print(msg['snippet'])
-        print(msg['id'])
+    return messages
+
+
+def get_mail(msg_id):
+    service = get_service()
+    results = service.users().messages().get(userId='me', id=msg_id).execute()
+    data = {'snippet': results['snippet'], 'threadId': results['threadId']}
+    return data
+
+
+def store():
+    engine = db.create_engine('sqlite:///user.db', echo=True)
+    conn = engine.connect()
+    result = get_mail('17a466be847c7eda')
+    conn.execute('INSERT INTO mail(description,thId) VALUES(:description,:thId)',
+                 (result['snippet']), result['threadId'])
+    print("entered successfully")
+    conn.close()
 
 
 if __name__ == '__main__':
