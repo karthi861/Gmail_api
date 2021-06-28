@@ -13,8 +13,8 @@ mail = Table(
    Column('id', Integer, primary_key=True),
    Column('mail_to', String(255)),
    Column('mail_from', VARCHAR),
-   Column('subject', String),
-   Column('date',String)
+   Column('mail_subject', String),
+   Column('mail_date',String)
 )
 session = Session()
 meta.create_all(engine)
