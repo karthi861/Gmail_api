@@ -33,8 +33,8 @@ def store():
     engine = db.create_engine('sqlite:///user.db', echo=True)
     conn = engine.connect()
     result = get_mail('17a466be847c7eda')
-    conn.execute('INSERT INTO mail(description,thId) VALUES(:description,:thId)',
-                 (result['snippet']), result['threadId'])
+    conn.execute('INSERT INTO mail(mail_from,mail_to,subject,date)  VALUES(:mail_from,:mail_to,:subject,:date)',
+                 results['from'], results['to'], results['subject'], results['date'])
     print("entered successfully")
     conn.close()
 
