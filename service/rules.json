@@ -35,7 +35,7 @@
     ],
     "Actions": {
       "addLabelIds": [
-        "SENT"
+        "STARRED"
       ],
       "removeLabelIds": []
     }
@@ -76,7 +76,7 @@
     ],
     "Actions": {
       "addLabelIds": [
-        "SENT"
+        "UNREAD"
       ],
       "removeLabelIds": []
     }
