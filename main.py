@@ -11,8 +11,10 @@ meta = db.MetaData()
 mail = Table(
    'mail', meta,
    Column('id', Integer, primary_key=True),
-   Column('description', String),
-   Column('thID', String),
+   Column('mail_to', String(255)),
+   Column('mail_from', VARCHAR),
+   Column('subject', String),
+   Column('date',String)
 )
 session = Session()
 meta.create_all(engine)
