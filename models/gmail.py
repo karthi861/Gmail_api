@@ -1,5 +1,7 @@
 from __future__ import print_function
 import os.path
+import base64
+import email
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -36,9 +38,11 @@ def get_email():
 def get_mail(msg_id):
     service = get_service()
     results = service.users().messages().get(userId='me', id=msg_id).execute()
-    data = {'snippet': results['snippet'], 'threadId': results['threadId']}
+    msg_str = base64.urlsafe_b64decode(results['raw'])
+    mime_msg = email.message_from_bytes(msg_str)
+    data = {'to': mime_msg['To'], 'from': mime_msg['From'], 'date': mime_msg['Date'], 'subject': mime_msg['Subject']}
     return data
 
 
 if __name__ == '__main__':
-    get_email()
+    get_mail('17a466be847c7eda')
