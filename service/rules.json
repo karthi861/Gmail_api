@@ -1,0 +1,84 @@
+{
+  "rule1" : {
+    "predicate": [
+      "ALL"
+    ],
+    "fields": [
+      {
+        "name": "from",
+        "value": [
+          "contains",
+          "email@engage.windows.com"
+        ]
+      },
+      {
+        "name": "to",
+        "value": [
+          "contains",
+          "karthikeyanj2001@gmail.com"
+        ]
+      },
+      {
+        "name": "subject",
+        "value": [
+          "contains",
+          "Introducing Windows 11"
+        ]
+      },
+      {
+        "name": "date",
+        "value": [
+          "contains",
+          "Fri, 25 Jun 2021 21:52:51 -0600"
+        ]
+      }
+    ],
+    "Actions": {
+      "addLabelIds": [
+        "SENT"
+      ],
+      "removeLabelIds": []
+    }
+  },
+  "rule 2":{
+  "predicate":[
+    "ANY"
+  ],
+    "fields": [
+      {
+        "name": "from",
+        "value": [
+          "contains",
+          "email@engage.windows.com"
+        ]
+      },
+      {
+        "name": "to",
+        "value": [
+          "contains",
+          "karthikeyanj2001@gmail.com"
+        ]
+      },
+      {
+        "name": "subject",
+        "value": [
+          "contains",
+          "Introducing Windows 11"
+        ]
+      },
+      {
+        "name": "date",
+        "value": [
+          "contains",
+          "Fri, 25 Jun 2021 21:52:51 -0600"
+        ]
+      }
+    ],
+    "Actions": {
+      "addLabelIds": [
+        "SENT"
+      ],
+      "removeLabelIds": []
+    }
+  }
+}
