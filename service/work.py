@@ -40,33 +40,31 @@ def store():
 
  
 def mark_as_unread():
-    engine = db.create_engine('sqlite:///user.db', echo=True)
-    conn = engine.connect()
     rules = json.load(open('rules.json'))
     for rule in rules["rule1"]["fields"]:
         print(rule['name'], rule['value'])
-        query = "SELECT mail_from  FROM mail WHERE " + "mail_" + rule["name"] + " LIKE '" + rule["value"][1] + "'"
-        result = conn.execute(query)
-        print(result)
         service = get_service()
         service.users().messages().modify(userId='me', id='17a46732ac59fcb9',
                                           body={'addLabelIds': ['UNREAD']}).execute()
 
         
         
- def move_label():
-    engine = db.create_engine('sqlite:///user.db, echo=True')
-    conn = engine.connect()
+ def mark_as_read():
     rules = json.load(open('rules.json'))
-    for rule in rules["rule1"]['fields']:
+    for rule in rules["rule1"]["fields"]:
         print(rule['name'], rule['value'])
-        query = "SELECT mail_from  FROM mail WHERE " + "mail_" + rule["name"] + " LIKE '" + rule["value"][
-            1] + "'"
-        result = conn.execute(query)
-        return result
-    service = get_service()
-    service.users().messages().modify(userId='me', id='17a46732ac59fcb9',
-                                      body={'addLabelIds': ['STARRED']}).execute()
+        service = get_service()
+        service.users().messages().modify(userId='me', id='17a46732ac59fcb9',
+                                          body={'removeLabelIds': ['UNREAD']}).execute()
+
+
+def archive_mail():
+    rules = json.load(open('rules.json'))
+    for rule in rules["rule1"]["fields"]:
+        print(rule['name'], rule['value'])
+        service = get_service()
+        service.users().messages().modify(userId='me', id='17a46732ac59fcb9',
+                                          body={'removeLabelIds': ['INBOX']}).execute()
 
 
     
@@ -74,4 +72,5 @@ def mark_as_unread():
     if __name__ == '__main__':
     #store()
     #mark_as_unread()
-    #move_label()
+    #mark_as_read()
+    #archive_mail()
